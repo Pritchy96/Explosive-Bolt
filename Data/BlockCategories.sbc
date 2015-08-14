@@ -120,6 +120,8 @@
         <string>CubeBlock/Window3x3FlatInv</string>
         <string>Decoy/LargeDecoy</string>
         <string>Door/(null)</string>
+        <string>Door/LargeExplosiveBolt</string>
+        <string>Door/SmallExplosiveBolt</string>
         <string>Drill/LargeBlockDrill</string>
         <string>GravityGenerator/(null)</string>
         <string>GravityGeneratorSphere/(null)</string>
@@ -163,7 +165,6 @@
         <string>Thrust/LargeBlockSmallThrust</string>
         <string>VirtualMass/VirtualMassLarge</string>
         <string>Warhead/LargeWarhead</string>
-        <string>Warhead/LargeExplosiveBolt</string>
         <string>Wheel/RealWheel</string>
         <string>Wheel/RealWheel1x1</string>
         <string>Wheel/RealWheel5x5</string>
@@ -307,7 +308,6 @@
         <string>Thrust/SmallBlockSmallThrust</string>
         <string>VirtualMass/VirtualMassSmall</string>
         <string>Warhead/SmallWarhead</string>
-        <string>Warhead/SmallExplosiveBolt</string>
         <string>Wheel/SmallRealWheel</string>
         <string>Wheel/SmallRealWheel1x1</string>
         <string>Wheel/SmallRealWheel5x5</string>
@@ -414,7 +414,6 @@
       <Name>WeaponsTools</Name>
       <ItemIds>
         <string>Warhead/LargeWarhead</string>
-        <string>Warhead/LargeExplosiveBolt</string>
         <string>InteriorTurret/LargeInteriorTurret</string>
         <string>LargeGatlingTurret/(null)</string>
         <string>LargeMissileTurret/(null)</string>

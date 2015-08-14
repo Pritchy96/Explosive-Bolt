@@ -3,9 +3,9 @@
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CubeBlocks>
 
-<Definition xsi:type="MyObjectBuilder_WarheadDefinition">
+<Definition xsi:type="MyObjectBuilder_DoorDefinition">
       <Id>
-        <TypeId>Warhead</TypeId>
+        <TypeId>Door</TypeId>
         <SubtypeId>LargeExplosiveBolt</SubtypeId>
       </Id>
       <DisplayName>Explosive Bolt</DisplayName>
@@ -46,9 +46,9 @@
       <WarheadExplosionDamage>0</WarheadExplosionDamage>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_WarheadDefinition">
+    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
       <Id>
-        <TypeId>Warhead</TypeId>
+        <TypeId>Door</TypeId>
         <SubtypeId>SmallExplosiveBolt</SubtypeId>
       </Id>
       <DisplayName>Explosive Bolt</DisplayName>

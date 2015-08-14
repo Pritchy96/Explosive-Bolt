@@ -18,85 +18,58 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+ 
 using IMyCubeBlock = Sandbox.ModAPI.IMyCubeBlock;
 namespace ExplosiveBolt
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Warhead))]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Door))]
     class ExplosiveBolt : MyGameLogicComponent
     {
         MyObjectBuilder_EntityBase m_objectBuilder;
         private string SubTypeNameLarge = "LargeExplosiveBolt", SubTypeNameSmall = "SmallExplosiveBolt";
         private bool _didInit = false;
-        IMyCubeBlock block;
-        IMySlimBlock slimBlock;
+        IMyDoor Door;
 
         public override void Close()
         {
             //MyLogger.Default.WriteLine("Close()");
-            if (block == null)
-            {
-                //MyLogger.Default.WriteLine("Block is null in Close()");
-                return;
-            }
+            Door.DoorStateChanged -= Detonate;
         }
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
-            base.Init(objectBuilder);
-            NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
-
-            NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
-
+            //Get door that script it attatched to.
+            Door = Entity as IMyDoor;
+            //Set up detonation callback when 'door' is opened.
+            Door.DoorStateChanged += Detonate;
+            
             m_objectBuilder = objectBuilder;
+           
             //DEBUG
-            //MyLogger.Default.ToScreen = false;
+            MyLogger.Default.ToScreen = false ;
             //MyLogger.Default.WriteLine("Successfully placed a bolt");
         }
 
-        public override void UpdateOnceBeforeFrame()
+        void Detonate(bool isOpening)
         {
-            base.UpdateOnceBeforeFrame();
-            DoInit();
-        }
+            //MyLogger.Default.WriteLine(isOpening.ToString());
 
-        public override void UpdateAfterSimulation10()
-        {
-            var blockDef = (MyObjectBuilder_Warhead)((IMyCubeBlock)Entity).GetObjectBuilderCubeBlock();
-
-            //Only bother if it's a explosive bolt..
-            if (block.BlockDefinition.SubtypeName == SubTypeNameLarge || block.BlockDefinition.SubtypeName == SubTypeNameSmall)
+            //if door is opening and is actually an explosive bolt (not a door).
+            if (isOpening && Door.BlockDefinition.SubtypeName.Contains("ExplosiveBolt"))
             {
-                //If countdown timer is <= 0, time to destroy cube.
-                if (blockDef.CountdownMs <= 0)
+                if (Door != null)
                 {
-                    //Damage
-                    ((IMyDestroyableObject)(slimBlock)).DoDamage(5000, MyDamageType.Weld, false);
+                    //MyLogger.Default.WriteLine("Bolt firing");
+                    ((Door.CubeGrid.GetCubeBlock(Door.Position)) as IMyDestroyableObject).DoDamage(2000, MyDamageType.Weld, false);
+
                     //Apply Damage
-                    slimBlock.ApplyAccumulatedDamage(false);
+                    //slimBlock.ApplyAccumulatedDamage(false);
                 }
-                base.UpdateAfterSimulation10();
+                else
+                {
+                    //MyLogger.Default.WriteLine("Door is not initialised");
+                }
             }
-        }
-
-        void DoInit()
-        {
-            //MyLogger.Default.WriteLine("DoInit()");
-            if (_didInit) return;
-            _didInit = true;
-
-            if (Entity == null)
-            {
-                //MyLogger.Default.WriteLine("Block is null");
-                _didInit = false;
-                return;
-            }
-
-            block = (IMyCubeBlock)Entity;
-            //Get SlimBlock from IMyCubeBlock
-            slimBlock = block.CubeGrid.GetCubeBlock(block.Position);
-            //Output SubTypeID
-            //MyLogger.Default.WriteLine(block.BlockDefinition.SubtypeName.ToString());
         }
 
         public override MyObjectBuilder_EntityBase GetObjectBuilder(bool copy = false)
@@ -111,7 +84,7 @@ namespace ExplosiveBolt
         protected override void UnloadData()
         {
             base.UnloadData();
-            //MyLogger.DefaultClose();
+            MyLogger.DefaultClose();
         }
     }
 
