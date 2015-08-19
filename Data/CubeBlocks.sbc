@@ -14,7 +14,7 @@
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="1" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\Cubes\Large\warhead.mwm</Model>
+      <Model>Models\ExplosiveBolt_Large.mwm</Model>
       <Components>
         <Component Subtype="SteelPlate" Count="10" />
         <Component Subtype="Girder" Count="24" />
@@ -57,7 +57,7 @@
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="1" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\Cubes\Small\warhead.mwm</Model>
+      <Model>Models\ExplosiveBolt_Small.mwm</Model>
       <Components>
         <Component Subtype="Girder" Count="1" />
         <Component Subtype="SmallTube" Count="2" />

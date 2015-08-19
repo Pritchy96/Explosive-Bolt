@@ -46,7 +46,7 @@ namespace ExplosiveBolt
             m_objectBuilder = objectBuilder;
            
             //DEBUG
-            MyLogger.Default.ToScreen = false ;
+            //MyLogger.Default.ToScreen = false ;
             //MyLogger.Default.WriteLine("Successfully placed a bolt");
         }
 
@@ -78,13 +78,17 @@ namespace ExplosiveBolt
         }
     }
 
+
+
+
+
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class LoggerSession : MySessionComponentBase
     {
         protected override void UnloadData()
         {
             base.UnloadData();
-            MyLogger.DefaultClose();
+            //MyLogger.DefaultClose();
         }
     }
 
